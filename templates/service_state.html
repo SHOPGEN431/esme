@@ -1,0 +1,545 @@
+{% extends "base.html" %}
+
+{% block title %}{{ service.name }} LLC Formation Services in {{ state_name }} | ESME Directory{% endblock %}
+{% block description %}{{ service.name }} offers LLC formation services in {{ state_name }}. {{ service.description }}{% endblock %}
+{% block keywords %}{{ service.name }} {{ state_name }}, LLC formation {{ state_name }}, {{ service.name|lower }} {{ state_name|lower }}{% endblock %}
+
+{% block content %}
+{% set theme_class = 'theme-legalzoom' if service.slug == 'legalzoom' else '' %}
+<div class="{{ theme_class }}">
+<!-- Service State Hero Section -->
+<section class="service-hero">
+    <div class="container">
+        <div class="service-hero-content">
+            <div class="breadcrumb">
+                <a href="{{ url_for('index') }}">Home</a> &gt; 
+                <a href="{{ url_for('service_page', service_slug=service.slug) }}">{{ service.name }}</a> &gt; 
+                <span>{{ state_name }}</span>
+            </div>
+            
+            <div class="service-info">
+                {% if service.recommended %}
+                <div class="recommended-badge-large">
+                    <span>🏆 TOP RECOMMENDED</span>
+                </div>
+                {% endif %}
+                <h1>{{ service.name }} in {{ state_name }}</h1>
+                <div class="service-rating-large">
+                    <span class="stars">
+                        {% for i in range(5) %}
+                            {% if i < service.rating|int %}
+                                <span class="star filled">★</span>
+                            {% else %}
+                                <span class="star">☆</span>
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                    <span class="rating-text">{{ service.rating }} ({{ service.reviews }} reviews)</span>
+                </div>
+                <div class="service-pricing-large">
+                    <strong>{{ service.pricing }}</strong>
+                </div>
+                <p class="service-description-large">{{ service.description }}</p>
+                <div class="service-actions-large">
+                    <a href="{{ service.website }}" class="btn btn-primary" target="_blank" rel="noopener">Get Started with {{ service.name }}</a>
+                    <a href="{{ url_for('service_page', service_slug=service.slug) }}" class="btn btn-outline">View All {{ service.name }} States</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Service State Details Section -->
+<section class="service-details">
+    <div class="container">
+        <div class="service-details-grid">
+            <!-- Service Features Section -->
+            <div class="features-section">
+                <h2>{{ service.name }} Features in {{ state_name }}</h2>
+                <div class="features-list">
+                    {% for feature in service.features %}
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">{{ feature }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <!-- State-Specific Information -->
+            <div class="states-coverage-section">
+                <h2>LLC Formation in {{ state_name }}</h2>
+                <div class="state-info-cards">
+                    <div class="info-card">
+                        <h3>Formation Process</h3>
+                        <p>Forming an LLC in {{ state_name }} with {{ service.name }} involves filing Articles of Organization with the Secretary of State, obtaining an EIN, and creating an operating agreement. {{ service.name }} handles all the paperwork for you.</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>{{ state_name }} Requirements</h3>
+                        <p>{{ state_name }} requires LLCs to have a registered agent, file annual reports, and maintain proper business records. {{ service.name }} provides registered agent services and compliance monitoring.</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>Benefits in {{ state_name }}</h3>
+                        <p>LLCs in {{ state_name }} offer limited liability protection, pass-through taxation, and flexible management structure. {{ service.name }} helps you take advantage of all these benefits.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Top 10 LLC Services Section -->
+<section class="top-10-llc-services">
+    <div class="container">
+        <h2>Top 10 LLC Formation Services in {{ state_name }}</h2>
+        <p>Here are the top 10 LLC formation services available in {{ state_name }}, ranked by customer satisfaction, pricing, and features:</p>
+        
+        <div class="top-10-grid">
+            <!-- #1 Northwestern -->
+            <div class="top-service-card top-1">
+                <div class="rank-badge">
+                    <span>#1</span>
+                </div>
+                <div class="top-service-header">
+                    <h3>Northwestern</h3>
+                    <div class="service-rating">
+                        <span class="stars">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                        </span>
+                        <span class="rating-text">4.8 (1250 reviews)</span>
+                    </div>
+                </div>
+                <div class="top-service-pricing">
+                    <strong>$39 formation service</strong>
+                </div>
+                <p class="top-service-description">Northwest Registered Agent offers the most cost-effective LLC formation service at just $39, with comprehensive business formation packages including free registered agent service.</p>
+                
+                <div class="pros-cons-mini">
+                    <div class="pros-mini">
+                        <h4>✅ Pros</h4>
+                        <ul>
+                            <li>Lowest price at $39</li>
+                            <li>Free registered agent service</li>
+                            <li>Comprehensive package</li>
+                            <li>Excellent customer service</li>
+                        </ul>
+                    </div>
+                    <div class="cons-mini">
+                        <h4>❌ Cons</h4>
+                        <ul>
+                            <li>Limited additional services</li>
+                            <li>No attorney consultations</li>
+                            <li>Basic website builder</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="top-service-actions">
+                    <a href="https://consumer-champion.org/LLCwebsite" class="btn btn-primary" target="_blank" rel="noopener">Get Started with Northwestern</a>
+                    <a href="{{ url_for('service_state_page', service_slug='northwestern', state_name=state_name) }}" class="btn btn-outline">View Details</a>
+                </div>
+            </div>
+
+            <!-- #2 LegalZoom -->
+            <div class="top-service-card top-2">
+                <div class="rank-badge">
+                    <span>#2</span>
+                </div>
+                <div class="top-service-header">
+                    <h3>LegalZoom</h3>
+                    <div class="service-rating">
+                        <span class="stars">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">☆</span>
+                        </span>
+                        <span class="rating-text">4.6 (2100 reviews)</span>
+                    </div>
+                </div>
+                <div class="top-service-pricing">
+                    <strong>Starting at $79 + state fees</strong>
+                </div>
+                <p class="top-service-description">LegalZoom is a well-established legal services company offering comprehensive LLC formation packages with additional legal document services.</p>
+                
+                <div class="top-service-actions">
+                    <a href="https://www.legalzoom.com" class="btn btn-primary" target="_blank" rel="noopener">Get Started with LegalZoom</a>
+                    <a href="{{ url_for('service_page', service_slug='legalzoom') }}" class="btn btn-outline">View Details</a>
+                </div>
+            </div>
+
+            <!-- #3 Incfile -->
+            <div class="top-service-card top-3">
+                <div class="rank-badge">
+                    <span>#3</span>
+                </div>
+                <div class="top-service-header">
+                    <h3>Incfile</h3>
+                    <div class="service-rating">
+                        <span class="stars">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">☆</span>
+                        </span>
+                        <span class="rating-text">4.7 (1650 reviews)</span>
+                    </div>
+                </div>
+                <div class="top-service-pricing">
+                    <strong>Starting at $0 + state fees</strong>
+                </div>
+                <p class="top-service-description">Incfile offers competitive pricing with a focus on simplicity and ease of use for LLC formation.</p>
+                
+                <div class="top-service-actions">
+                    <a href="https://www.incfile.com" class="btn btn-primary" target="_blank" rel="noopener">Get Started with Incfile</a>
+                    <a href="{{ url_for('service_page', service_slug='incfile') }}" class="btn btn-outline">View Details</a>
+                </div>
+            </div>
+
+            <!-- #4 ZenBusiness -->
+            <div class="top-service-card top-4">
+                <div class="rank-badge">
+                    <span>#4</span>
+                </div>
+                <div class="top-service-header">
+                    <h3>ZenBusiness</h3>
+                    <div class="service-rating">
+                        <span class="stars">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">☆</span>
+                        </span>
+                        <span class="rating-text">4.5 (1400 reviews)</span>
+                    </div>
+                </div>
+                <div class="top-service-pricing">
+                    <strong>Starting at $0 + state fees</strong>
+                </div>
+                <p class="top-service-description">ZenBusiness offers a unique $0 LLC formation service with ongoing business support and compliance monitoring.</p>
+                
+                <div class="top-service-actions">
+                    <a href="https://www.zenbusiness.com" class="btn btn-primary" target="_blank" rel="noopener">Get Started with ZenBusiness</a>
+                    <a href="{{ url_for('service_page', service_slug='zenbusiness') }}" class="btn btn-outline">View Details</a>
+                </div>
+            </div>
+
+            <!-- #5 Rocket Lawyer -->
+            <div class="top-service-card top-5">
+                <div class="rank-badge">
+                    <span>#5</span>
+                </div>
+                <div class="top-service-header">
+                    <h3>Rocket Lawyer</h3>
+                    <div class="service-rating">
+                        <span class="stars">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">☆</span>
+                        </span>
+                        <span class="rating-text">4.5 (1800 reviews)</span>
+                    </div>
+                </div>
+                <div class="top-service-pricing">
+                    <strong>$99.99/month subscription</strong>
+                </div>
+                <p class="top-service-description">Rocket Lawyer offers a subscription-based legal service model with unlimited legal documents and attorney consultations.</p>
+                
+                <div class="top-service-actions">
+                    <a href="https://www.rocketlawyer.com" class="btn btn-primary" target="_blank" rel="noopener">Get Started with Rocket Lawyer</a>
+                    <a href="{{ url_for('service_page', service_slug='rocket-lawyer') }}" class="btn btn-outline">View Details</a>
+                </div>
+            </div>
+
+            <!-- #6 BizFilings -->
+            <div class="top-service-card top-6">
+                <div class="rank-badge">
+                    <span>#6</span>
+                </div>
+                <div class="top-service-header">
+                    <h3>BizFilings</h3>
+                    <div class="service-rating">
+                        <span class="stars">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">☆</span>
+                            <span class="star">☆</span>
+                        </span>
+                        <span class="rating-text">4.3 (950 reviews)</span>
+                    </div>
+                </div>
+                <div class="top-service-pricing">
+                    <strong>Starting at $99 + state fees</strong>
+                </div>
+                <p class="top-service-description">BizFilings provides comprehensive business formation services with a focus on compliance and ongoing support.</p>
+                
+                <div class="top-service-actions">
+                    <a href="https://www.bizfilings.com" class="btn btn-primary" target="_blank" rel="noopener">Get Started with BizFilings</a>
+                    <a href="#" class="btn btn-outline">View Details</a>
+                </div>
+            </div>
+
+            <!-- #7 MyCorporation -->
+            <div class="top-service-card top-7">
+                <div class="rank-badge">
+                    <span>#7</span>
+                </div>
+                <div class="top-service-header">
+                    <h3>MyCorporation</h3>
+                    <div class="service-rating">
+                        <span class="stars">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">☆</span>
+                            <span class="star">☆</span>
+                        </span>
+                        <span class="rating-text">4.2 (800 reviews)</span>
+                    </div>
+                </div>
+                <div class="top-service-pricing">
+                    <strong>Starting at $89 + state fees</strong>
+                </div>
+                <p class="top-service-description">MyCorporation offers straightforward business formation services with a variety of business entity options.</p>
+                
+                <div class="top-service-actions">
+                    <a href="https://www.mycorporation.com" class="btn btn-primary" target="_blank" rel="noopener">Get Started with MyCorporation</a>
+                    <a href="#" class="btn btn-outline">View Details</a>
+                </div>
+            </div>
+
+            <!-- #8 Swyft Filings -->
+            <div class="top-service-card top-8">
+                <div class="rank-badge">
+                    <span>#8</span>
+                </div>
+                <div class="top-service-header">
+                    <h3>Swyft Filings</h3>
+                    <div class="service-rating">
+                        <span class="stars">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">☆</span>
+                            <span class="star">☆</span>
+                        </span>
+                        <span class="rating-text">4.1 (750 reviews)</span>
+                    </div>
+                </div>
+                <div class="top-service-pricing">
+                    <strong>Starting at $49 + state fees</strong>
+                </div>
+                <p class="top-service-description">Swyft Filings provides fast and efficient business formation services with competitive pricing.</p>
+                
+                <div class="top-service-actions">
+                    <a href="https://www.swyftfilings.com" class="btn btn-primary" target="_blank" rel="noopener">Get Started with Swyft Filings</a>
+                    <a href="#" class="btn btn-outline">View Details</a>
+                </div>
+            </div>
+
+            <!-- #9 Harbor Compliance -->
+            <div class="top-service-card top-9">
+                <div class="rank-badge">
+                    <span>#9</span>
+                </div>
+                <div class="top-service-header">
+                    <h3>Harbor Compliance</h3>
+                    <div class="service-rating">
+                        <span class="stars">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">☆</span>
+                            <span class="star">☆</span>
+                        </span>
+                        <span class="rating-text">4.0 (600 reviews)</span>
+                    </div>
+                </div>
+                <div class="top-service-pricing">
+                    <strong>Starting at $99 + state fees</strong>
+                </div>
+                <p class="top-service-description">Harbor Compliance specializes in business compliance and formation services with ongoing support.</p>
+                
+                <div class="top-service-actions">
+                    <a href="https://www.harborcompliance.com" class="btn btn-primary" target="_blank" rel="noopener">Get Started with Harbor Compliance</a>
+                    <a href="#" class="btn btn-outline">View Details</a>
+                </div>
+            </div>
+
+            <!-- #10 CorpNet -->
+            <div class="top-service-card top-10">
+                <div class="rank-badge">
+                    <span>#10</span>
+                </div>
+                <div class="top-service-header">
+                    <h3>CorpNet</h3>
+                    <div class="service-rating">
+                        <span class="stars">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">☆</span>
+                            <span class="star">☆</span>
+                        </span>
+                        <span class="rating-text">3.9 (500 reviews)</span>
+                    </div>
+                </div>
+                <div class="top-service-pricing">
+                    <strong>Starting at $89 + state fees</strong>
+                </div>
+                <p class="top-service-description">CorpNet offers business formation services with a focus on customer service and support.</p>
+                
+                <div class="top-service-actions">
+                    <a href="https://www.corpnet.com" class="btn btn-primary" target="_blank" rel="noopener">Get Started with CorpNet</a>
+                    <a href="#" class="btn btn-outline">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Local Businesses Section -->
+{% if local_businesses %}
+<section class="local-businesses">
+    <div class="container">
+        <h2>Local Business Services in {{ state_name }}</h2>
+        <p>Connect with local businesses that can help with your LLC formation and business needs in {{ state_name }}:</p>
+        
+        <div class="businesses-grid">
+            {% for business in local_businesses %}
+            <div class="business-card">
+                <div class="business-header">
+                    <h3>{{ business.name }}</h3>
+                    {% if business.rating %}
+                    <div class="business-rating">
+                        <span class="stars">
+                            {% for i in range(5) %}
+                                {% if i < business.rating|int %}
+                                    <span class="star filled">★</span>
+                                {% else %}
+                                    <span class="star">☆</span>
+                                {% endif %}
+                            {% endfor %}
+                        </span>
+                        <span class="rating-text">{{ business.rating }} ({{ business.reviews }} reviews)</span>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div class="business-location">
+                    <p><strong>Location:</strong> {{ business.city }}, {{ business.us_state }}</p>
+                    <p><strong>Address:</strong> {{ business.full_address }}</p>
+                    {% if business.phone %}
+                    <p><strong>Phone:</strong> <a href="tel:{{ business.phone }}">{{ business.phone }}</a></p>
+                    {% endif %}
+                </div>
+                
+                {% if business.subtypes %}
+                <div class="business-services">
+                    <h4>Services Offered:</h4>
+                    <p>{{ business.subtypes }}</p>
+                </div>
+                {% endif %}
+                
+                {% if business.site %}
+                <div class="business-actions">
+                    <a href="{{ business.site }}" class="btn btn-primary" target="_blank" rel="noopener">Visit Website</a>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Service Comparison Section -->
+<section class="service-comparison">
+    <div class="container">
+        <h2>How {{ service.name }} Compares in {{ state_name }}</h2>
+        <div class="comparison-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>{{ service.name }} in {{ state_name }}</th>
+                        <th>Industry Average</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Starting Price</td>
+                        <td>{{ service.pricing }}</td>
+                        <td>$79 + state fees</td>
+                    </tr>
+                    <tr>
+                        <td>Customer Rating</td>
+                        <td>{{ service.rating }}/5</td>
+                        <td>4.3/5</td>
+                    </tr>
+                    <tr>
+                        <td>State Coverage</td>
+                        <td>Available in {{ state_name }}</td>
+                        <td>All 50 states</td>
+                    </tr>
+                    <tr>
+                        <td>Registered Agent</td>
+                        <td>{% if 'registered agent' in service.description|lower %}Included{% else %}Additional{% endif %}</td>
+                        <td>Usually included</td>
+                    </tr>
+                    <tr>
+                        <td>Processing Time</td>
+                        <td>1-2 business days</td>
+                        <td>3-5 business days</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Ready to Form Your LLC in {{ state_name }}?</h2>
+            <p>Get started with {{ service.name }} today and take the first step towards building your business in {{ state_name }}.</p>
+            <div class="cta-buttons">
+                <a href="{{ service.website }}" class="btn btn-primary" target="_blank" rel="noopener">Get Started with {{ service.name }}</a>
+                <a href="{{ url_for('state_page', state_name=state_name) }}" class="btn btn-outline">Compare All Services in {{ state_name }}</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Related States Section -->
+<section class="related-states">
+    <div class="container">
+        <h2>Other States Available with {{ service.name }}</h2>
+        <div class="states-grid">
+            {% for state in service.states %}
+                {% if state != state_name %}
+                <div class="state-card">
+                    <h3>{{ state }}</h3>
+                    <p>{{ service.name }} LLC formation services in {{ state }}</p>
+                    <a href="{{ url_for('service_state_page', service_slug=service.slug, state_name=state) }}" class="btn btn-outline">View {{ state }}</a>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+</div>
+{% endblock %}

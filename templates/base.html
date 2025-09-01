@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ESME LLC Directory - Find LLC Formation Services{% endblock %}</title>
+    <meta name="description" content="{% block description %}Discover the best LLC formation services and local business solutions across the United States. Find comprehensive LLC services for your business needs.{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}LLC formation, business formation, LLC services, business directory{% endblock %}">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{% block og_title %}ESME LLC Directory{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Find the best LLC formation services and local business solutions{% endblock %}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.url }}">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ request.url }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.svg') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon.svg') }}">
+    <!-- Fallback favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏢</text></svg>">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="msapplication-TileColor" content="#2563eb">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Critical CSS Inline -->
+    <style>
+        /* Critical CSS for above-the-fold content */
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--primary-color:#2563eb;--primary-dark:#1d4ed8;--primary-light:#3b82f6;--secondary-color:#64748b;--accent-color:#f59e0b;--accent-light:#fbbf24;--text-color:#1e293b;--text-light:#64748b;--text-lighter:#94a3b8;--background-color:#ffffff;--background-light:#f8fafc;--background-dark:#f1f5f9;--border-color:#e2e8f0;--border-light:#f1f5f9;--shadow:0 1px 3px 0 rgba(0,0,0,0.1),0 1px 2px 0 rgba(0,0,0,0.06);--shadow-md:0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);--shadow-lg:0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);--shadow-xl:0 20px 25px -5px rgba(0,0,0,0.1),0 10px 10px -5px rgba(0,0,0,0.04);--border-radius:12px;--border-radius-lg:16px;--border-radius-xl:24px;--transition:all 0.3s cubic-bezier(0.4,0,0.2,1);--transition-fast:all 0.15s cubic-bezier(0.4,0,0.2,1)}
+        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color);font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+        .container{max-width:1200px;margin:0 auto;padding:0 24px}
+        h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;margin-bottom:1rem;color:var(--text-color);letter-spacing:-0.025em}
+        h1{font-size:3.5rem;font-weight:800;line-height:1.1}h2{font-size:2.5rem;font-weight:700}h3{font-size:1.875rem;font-weight:600}
+        .btn{display:inline-flex;align-items:center;justify-content:center;padding:16px 32px;border-radius:var(--border-radius);text-decoration:none;font-weight:600;font-size:1rem;transition:var(--transition);border:none;cursor:pointer;line-height:1;white-space:nowrap;gap:8px;min-height:56px}
+        .btn-primary{background:linear-gradient(135deg,var(--primary-color) 0%,var(--primary-dark) 100%);color:white;box-shadow:var(--shadow-md)}
+        .btn-primary:hover{background:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary-color) 100%);transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+        .btn-outline{background:transparent;color:var(--primary-color);border:2px solid var(--primary-color);font-weight:600}
+        .btn-outline:hover{background:var(--primary-color);color:white;transform:translateY(-2px);box-shadow:var(--shadow-md)}
+        .header{background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);box-shadow:var(--shadow);position:sticky;top:0;z-index:1000;border-bottom:1px solid var(--border-light)}
+        .navbar{display:flex;justify-content:space-between;align-items:center;padding:1rem 0}
+        .nav-brand .logo{text-decoration:none;color:var(--primary-color);display:flex;align-items:center;gap:12px}
+        .nav-brand h1{font-size:1.75rem;margin:0;background:linear-gradient(135deg,var(--primary-color) 0%,var(--primary-dark) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .nav-menu{display:flex;align-items:center;gap:2rem}
+        .nav-list{display:flex;list-style:none;gap:2rem;margin:0;align-items:center}
+        .nav-link{text-decoration:none;color:var(--text-color);font-weight:500;font-size:1rem;transition:var(--transition);padding:8px 16px;border-radius:var(--border-radius)}
+        .nav-link:hover{color:var(--primary-color);background:var(--background-light)}
+        .hero{padding:6rem 0 4rem;background:linear-gradient(135deg,var(--background-light) 0%,var(--background-dark) 100%);text-align:center;position:relative;overflow:hidden}
+        .hero-title{font-size:4rem;font-weight:800;background:linear-gradient(135deg,var(--text-color) 0%,var(--primary-color) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1.5rem;line-height:1.1}
+        .hero-subtitle{font-size:1.375rem;color:var(--text-light);margin-bottom:3rem;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.6}
+        .hero-buttons{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap}
+        .main{min-height:60vh}
+        .footer{background:var(--text-color);color:white;padding:4rem 0 2rem}
+        .nav-toggle{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:8px}
+        .nav-toggle span{width:25px;height:3px;background:var(--text-color);transition:var(--transition)}
+        @media (max-width:768px){.nav-menu{display:none}.nav-toggle{display:flex}.hero-title{font-size:2.5rem}.hero-subtitle{font-size:1.125rem}.hero-buttons{flex-direction:column;align-items:center}}
+    </style>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="{{ url_for('static', filename='styles.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"></noscript>
+    
+    <!-- Defer non-critical JavaScript -->
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ESME LLC Directory",
+        "description": "Find the best LLC formation services and local business solutions",
+        "url": "{{ request.url_root }}"
+    }
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="{{ url_for('index') }}" class="logo">
+                        <h1>ESME LLC Directory</h1>
+                    </a>
+                </div>
+                
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link">Services</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ url_for('service_page', service_slug='northwestern') }}">Northwestern</a></li>
+                                <li><a href="{{ url_for('service_page', service_slug='legalzoom') }}">LegalZoom</a></li>
+                                <li><a href="{{ url_for('service_page', service_slug='rocket-lawyer') }}">Rocket Lawyer</a></li>
+                                <li><a href="{{ url_for('service_page', service_slug='incfile') }}">Incfile</a></li>
+                                <li><a href="{{ url_for('service_page', service_slug='zenbusiness') }}">ZenBusiness</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link">States</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ url_for('state_page', state_name='California') }}">California</a></li>
+                                <li><a href="{{ url_for('state_page', state_name='Texas') }}">Texas</a></li>
+                                <li><a href="{{ url_for('state_page', state_name='Florida') }}">Florida</a></li>
+                                <li><a href="{{ url_for('state_page', state_name='New York') }}">New York</a></li>
+                                <li><a href="{{ url_for('state_page', state_name='Illinois') }}">Illinois</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url_for('about') }}" class="nav-link">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url_for('locations') }}" class="nav-link">All Locations</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url_for('contact') }}" class="nav-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ESME LLC Directory</h3>
+                    <p>Your trusted resource for finding the best LLC formation services and local business solutions across the United States.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="{{ url_for('index') }}">Home</a>
+                    <a href="{{ url_for('about') }}">About</a>
+                    <a href="{{ url_for('contact') }}">Contact</a>
+                    <a href="{{ url_for('privacy') }}">Privacy Policy</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Top Services</h3>
+                    <a href="{{ url_for('service_page', service_slug='northwestern') }}">Northwestern</a>
+                    <a href="{{ url_for('service_page', service_slug='legalzoom') }}">LegalZoom</a>
+                    <a href="{{ url_for('service_page', service_slug='incfile') }}">Incfile</a>
+                    <a href="{{ url_for('service_page', service_slug='zenbusiness') }}">ZenBusiness</a>
+                </div>
+                
+                
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ESME LLC Directory. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sticky CTA (Desktop & Mobile) -->
+    {% set cta_href = 'https://consumer-champion.org/LLCwebsite' %}
+    <div class="sticky-cta" role="region" aria-label="Quick start CTA">
+        <div class="container">
+            <div class="sticky-cta-content">
+                <span class="sticky-cta-fomo">{% if state_name is defined %}Form your LLC in {{ state_name }} today. {% endif %}People are choosing Northwestern today — trusted $39 formation.</span>
+                <a href="{{ cta_href }}" class="btn btn-primary btn-lg" target="_blank" rel="noopener">Get Started for LLC</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

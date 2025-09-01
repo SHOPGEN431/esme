@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block title %}ESME LLC Directory - Find LLC Formation Services{% endblock %}
+{% block description %}Discover the best LLC formation services and local business solutions across the United States. Compare top providers and find local businesses in your state.{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">Find Your Perfect LLC Formation Service</h1>
+            <p class="hero-subtitle">Discover the top LLC formation services and local business solutions across the United States. Get started with confidence and build your business foundation.</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn btn-primary">Explore Services</a>
+                <a href="#states" class="btn btn-outline">Browse States</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="services-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Top LLC Formation Services</h2>
+            <p class="lead">Compare the best LLC formation services available nationwide. Each service has been carefully evaluated for quality, pricing, and customer satisfaction.</p>
+        </div>
+        
+        <div class="services-grid">
+            {% for service in services %}
+            <div class="service-card {% if service.recommended %}recommended{% endif %}">
+                {% if service.recommended %}
+                <div class="recommended-badge">
+                    <span>🏆 TOP RECOMMENDED</span>
+                </div>
+                {% endif %}
+                <div class="service-header">
+                    <h3>{{ service.name }}</h3>
+                    <div class="service-rating">
+                        <span class="stars">
+                            {% for i in range(5) %}
+                                {% if i < service.rating|int %}
+                                    <span class="star filled">★</span>
+                                {% else %}
+                                    <span class="star">☆</span>
+                                {% endif %}
+                            {% endfor %}
+                        </span>
+                        <span class="rating-text">{{ service.rating }} ({{ service.reviews }} reviews)</span>
+                    </div>
+                </div>
+                
+                <div class="service-pricing">
+                    <strong>{{ service.pricing }}</strong>
+                </div>
+                
+                <p class="service-description">{{ service.description }}</p>
+                
+                <div class="service-features">
+                    <h4>Key Features:</h4>
+                    <ul>
+                        {% for feature in service.features[:3] %}
+                        <li>{{ feature }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                
+                <div class="service-actions">
+                    <a href="{{ url_for('service_page', service_slug=service.slug) }}" class="btn btn-outline">View Details</a>
+                    <a href="{{ service.website }}" class="btn btn-primary" target="_blank" rel="noopener">Get Started</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- States Section -->
+<section id="states" class="states-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Browse by State</h2>
+            <p class="lead">Find LLC services and local businesses in your state. Each state has specific requirements and local resources to help you succeed.</p>
+        </div>
+        
+        <div class="states-grid">
+            {% for state in states %}
+            <div class="state-card">
+                <h3>{{ state }}</h3>
+                <p>Find LLC formation services and local business solutions in {{ state }}</p>
+                <a href="{{ url_for('state_page', state_name=state) }}" class="btn btn-outline">View {{ state }}</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="about-section">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Why Choose ESME LLC Directory?</h2>
+                <p class="lead">Our comprehensive directory features the top LLC formation services, providing detailed information about their coverage across all 50 states. Each service has dedicated pages showing their local LLC services and contact information for every state they operate in.</p>
+                
+                <div class="features-grid">
+                    <div class="feature">
+                        <h4>🏛️ State Coverage</h4>
+                        <p>Complete state-by-state breakdown with local requirements and regulations</p>
+                    </div>
+                    <div class="feature">
+                        <h4>📞 Direct Contact</h4>
+                        <p>Get direct contact information and connect with service providers</p>
+                    </div>
+                    <div class="feature">
+                        <h4>⭐ Verified Reviews</h4>
+                        <p>Real customer feedback and ratings from verified users</p>
+                    </div>
+                    <div class="feature">
+                        <h4>💰 Transparent Pricing</h4>
+                        <p>Clear pricing information with no hidden fees or surprises</p>
+                    </div>
+                    <div class="feature">
+                        <h4>🚀 Fast Processing</h4>
+                        <p>Services that prioritize speed and efficiency</p>
+                    </div>
+                    <div class="feature">
+                        <h4>🛡️ Trusted Partners</h4>
+                        <p>Vetted and verified service providers you can trust</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Ready to Start Your LLC?</h2>
+            <p class="lead">Join thousands of entrepreneurs who have successfully formed their LLCs through our recommended services. Get started today and take the first step towards building your business.</p>
+            <div class="cta-buttons">
+                <a href="#services" class="btn btn-primary">Compare Services</a>
+                <a href="{{ url_for('contact') }}" class="btn btn-outline">Get Help</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

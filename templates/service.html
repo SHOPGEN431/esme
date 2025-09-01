@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% block title %}{{ service.name }} - LLC Formation Services | ESME Directory{% endblock %}
+{% block description %}{{ service.description }}{% endblock %}
+{% block keywords %}{{ service.name }}, LLC formation, business formation, {{ service.name|lower }} reviews{% endblock %}
+
+{% block content %}
+<!-- Service Hero Section -->
+<section class="service-hero">
+    <div class="container">
+        <div class="service-hero-content">
+            <div class="service-info">
+                {% if service.recommended %}
+                <div class="recommended-badge-large">
+                    <span>🏆 TOP RECOMMENDED</span>
+                </div>
+                {% endif %}
+                <h1>{{ service.name }}</h1>
+                <div class="service-rating-large">
+                    <span class="stars">
+                        {% for i in range(5) %}
+                            {% if i < service.rating|int %}
+                                <span class="star filled">★</span>
+                            {% else %}
+                                <span class="star">☆</span>
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                    <span class="rating-text">{{ service.rating }} ({{ service.reviews }} reviews)</span>
+                </div>
+                <div class="service-pricing-large">
+                    <strong>{{ service.pricing }}</strong>
+                </div>
+                <p class="service-description-large">{{ service.description }}</p>
+                <div class="service-actions-large">
+                    <a href="{{ service.website }}" class="btn btn-primary" target="_blank" rel="noopener">Get Started with {{ service.name }}</a>
+                    <a href="#features" class="btn btn-outline">View Features</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Service Details Section -->
+<section class="service-details">
+    <div class="container">
+        <div class="service-details-grid">
+            <!-- Features Section -->
+            <div id="features" class="features-section">
+                <h2>{{ service.name }} Key Features</h2>
+                <div class="features-list">
+                    {% for feature in service.features %}
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">{{ feature }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <!-- States Coverage Section -->
+            <div class="states-coverage-section">
+                <h2>Available States</h2>
+                <p>{{ service.name }} provides LLC formation services in the following states:</p>
+                <div class="states-grid">
+                    {% for state in service.states %}
+                    <div class="state-item">
+                        <a href="{{ url_for('service_state_page', service_slug=service.slug, state_name=state) }}">{{ state }}</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pros and Cons Section -->
+<section class="pros-cons-section">
+    <div class="container">
+        <h2>{{ service.name }} Pros and Cons</h2>
+        <div class="pros-cons-grid">
+            <div class="pros-section">
+                <h3>✅ Pros</h3>
+                <ul class="pros-list">
+                    {% for pro in service.pros %}
+                    <li>{{ pro }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="cons-section">
+                <h3>❌ Cons</h3>
+                <ul class="cons-list">
+                    {% for con in service.cons %}
+                    <li>{{ con }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Service Comparison Section -->
+<section class="service-comparison">
+    <div class="container">
+        <h2>How {{ service.name }} Compares</h2>
+        <div class="comparison-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>{{ service.name }}</th>
+                        <th>Industry Average</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Starting Price</td>
+                        <td>{{ service.pricing }}</td>
+                        <td>$79 + state fees</td>
+                    </tr>
+                    <tr>
+                        <td>Customer Rating</td>
+                        <td>{{ service.rating }}/5</td>
+                        <td>4.3/5</td>
+                    </tr>
+                    <tr>
+                        <td>States Covered</td>
+                        <td>{{ service.states|length }} states</td>
+                        <td>All 50 states</td>
+                    </tr>
+                    <tr>
+                        <td>Registered Agent</td>
+                        <td>{% if 'registered agent' in service.description|lower %}Included{% else %}Additional{% endif %}</td>
+                        <td>Usually included</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Ready to Start Your LLC?</h2>
+            <p>Get started with {{ service.name }} today and take the first step towards building your business.</p>
+            <div class="cta-buttons">
+                <a href="{{ service.website }}" class="btn btn-primary" target="_blank" rel="noopener">Get Started with {{ service.name }}</a>
+                <a href="{{ url_for('index') }}" class="btn btn-outline">Compare Other Services</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Related States Section -->
+<section class="related-states">
+    <div class="container">
+        <h2>Find {{ service.name }} in Your State</h2>
+        <div class="states-grid">
+            {% for state in service.states[:6] %}
+            <div class="state-card">
+                <h3>{{ state }}</h3>
+                <p>{{ service.name }} LLC formation services in {{ state }}</p>
+                <a href="{{ url_for('service_state_page', service_slug=service.slug, state_name=state) }}" class="btn btn-outline">View {{ state }}</a>
+            </div>
+            {% endfor %}
+        </div>
+        {% if service.states|length > 6 %}
+        <div class="view-more">
+            <a href="#states" class="btn btn-outline">View All {{ service.states|length }} States</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

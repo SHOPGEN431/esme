@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}All Locations | ESME Directory{% endblock %}
+{% block description %}Browse all states, services, and service-by-state pages in one place.{% endblock %}
+{% block keywords %}locations, states, services, sitemap, all pages{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">All Locations</h1>
+            <p class="hero-subtitle">Quick links to every state, service, and service-by-state combination.</p>
+        </div>
+    </div>
+    
+</section>
+
+<section class="states-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>States</h2>
+            <p class="lead">Jump to a state page to compare top LLC services and local businesses.</p>
+        </div>
+        <div class="states-grid">
+            {% for state in states %}
+            <div class="state-card">
+                <h3>{{ state }}</h3>
+                <p>Top LLC services and local businesses in {{ state }}</p>
+                <a href="{{ url_for('state_page', state_name=state) }}" class="btn btn-outline">View {{ state }}</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="services-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Services</h2>
+            <p class="lead">Explore each formation service and their coverage.</p>
+        </div>
+        <div class="services-grid">
+            {% for svc in services %}
+            <div class="service-card">
+                <div class="service-header">
+                    <h3>{{ svc.name }}</h3>
+                </div>
+                <p class="service-description">{{ svc.description }}</p>
+                <div class="service-actions">
+                    <a href="{{ url_for('service_page', service_slug=svc.slug) }}" class="btn btn-outline">View {{ svc.name }}</a>
+                    <a href="{{ svc.website }}" class="btn btn-primary" target="_blank" rel="noopener">Go to Website</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="states-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Services by State</h2>
+            <p class="lead">Direct links to every service’s page in each state.</p>
+        </div>
+        {% for svc in services %}
+        <div class="feature" style="text-align:left">
+            <h4>{{ svc.name }} in all states</h4>
+            <div class="states-grid">
+                {% for state in states %}
+                <div class="state-item">
+                    <a href="{{ url_for('service_state_page', service_slug=svc.slug, state_name=state) }}">{{ svc.name }} in {{ state }}</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+
+
